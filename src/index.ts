@@ -81,93 +81,63 @@ export interface FrontendUser {
    */
   api: API;
 
-  notifications: {
-    read: Array<{
-      _id: string;
-      avatar: string;
-      message: string;
-      date: Date;
-    }>;
-    unread: Array<{
-      _id: string;
-      avatar: string;
-      message: string;
-      date: Date;
-    }>;
-  };
-
-  /**
-   * The user's uuid.
-   */
   _id: string;
 
-  /**
-   * The user's uid.
-   */
-  uid: number;
+  uid: string;
 
-  /**
-   * The user's username.
-   */
   username: string;
 
-  /**
-   * Whether or not the user has a premium subcription.
-   */
-  premium: boolean;
+  invite: string;
 
-  /**
-   * The user's email.
-   */
+  uploadKey: string;
+
+  lastDomainAddition: Date;
+
+  lastKeyRegen: Date;
+
+  lastUsernameChange: Date;
+
+  lastFileArchive: Date;
+
   email: string;
 
-  /**
-   * Whether or not the user's email is verified.
-   */
   emailVerified: boolean;
 
-  /**
-   * The user's email verification key.
-   */
   emailVerificationKey: string;
 
-  /**
-   * The user's discord id and avatar.
-   */
   discord: {
     id: string;
     avatar: string;
   };
 
-  /**
-   * The number of strikes the user has.
-   */
   strikes: number;
 
-  /**
-   * The user's blacklist status and reason.
-   */
+  disabled: boolean;
+
   blacklisted: {
     status: boolean;
     reason: string;
   };
 
-  /**
-   * The date that the user registered.
-   */
+  uploads: number;
+
+  invites: number;
+
+  invitedBy: string;
+
+  invitedUsers: string[];
+
   registrationDate: Date;
 
-  /**
-   * The last time the user logged in.
-   */
   lastLogin: Date;
 
-  /**
-   * Whether or not the user is an admin.
-   */
   admin: boolean;
 
+  hash: string;
+
   mfa: boolean;
+
+  notifs: string[] | null;
 }
 
 export interface Notification {
@@ -469,7 +439,7 @@ class API {
   async refreshToken(): Promise<{
     success: boolean;
     accessToken: string;
-    user: string;
+    user: User;
   }> {
     const data = await this.request({
       endpoint: '/auth/token',
