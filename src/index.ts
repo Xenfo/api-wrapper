@@ -81,6 +81,21 @@ export interface FrontendUser {
    */
   api: API;
 
+  notifications: {
+    read: Array<{
+      _id: string;
+      avatar: string;
+      message: string;
+      date: Date;
+    }>;
+    unread: Array<{
+      _id: string;
+      avatar: string;
+      message: string;
+      date: Date;
+    }>;
+  };
+
   _id: string;
 
   uid: string;
