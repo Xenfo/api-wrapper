@@ -494,8 +494,6 @@ class API {
   }
 
   async do2fa(
-    username: string,
-    password: string,
     token: string,
     id: string
   ): Promise<{
@@ -507,8 +505,6 @@ class API {
       endpoint: `/auth/otp/verify/${id}`,
       method: 'POST',
       body: {
-        username,
-        password,
         token
       }
     });
