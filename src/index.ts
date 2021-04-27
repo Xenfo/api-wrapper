@@ -17,8 +17,6 @@ interface User {
 
   username: string;
 
-  invite: string;
-
   uploadKey: string;
 
   lastDomainAddition: Date;
@@ -50,12 +48,6 @@ interface User {
   };
 
   uploads: number;
-
-  invites: number;
-
-  invitedBy: string;
-
-  invitedUsers: string[];
 
   registrationDate: Date;
 
@@ -102,8 +94,6 @@ export interface FrontendUser {
 
   username: string;
 
-  invite: string;
-
   uploadKey: string;
 
   lastDomainAddition: Date;
@@ -135,12 +125,6 @@ export interface FrontendUser {
   };
 
   uploads: number;
-
-  invites: number;
-
-  invitedBy: string;
-
-  invitedUsers: string[];
 
   registrationDate: Date;
 
@@ -237,7 +221,6 @@ class API {
     const stats: {
       total: number;
       blacklisted: number;
-      unusedInvites: number;
     } = await this.request({ endpoint: '/users', method: 'GET' });
     const totalUsers = stats.total;
     const totalBans = stats.blacklisted;
@@ -375,13 +358,11 @@ class API {
    * @param {string} username The user's username
    * @param {string} password The user's password.
    * @param {string} email The email to register with.
-   * @param {string} invite The invite to register with.
    */
   async register(
     username: string,
     password: string,
-    email: string,
-    invite: string
+    email: string
   ): Promise<{
     success: boolean;
     message: string;
@@ -392,8 +373,7 @@ class API {
       body: {
         username,
         password,
-        email,
-        invite
+        email
       }
     });
 
@@ -686,7 +666,6 @@ class API {
       registrationDate: Date;
       role: string;
       uploads: number;
-      invitedBy: string;
       avatar: string;
     };
   }> {
