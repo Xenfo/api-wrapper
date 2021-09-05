@@ -33,9 +33,10 @@ interface User {
 
   emailVerificationKey: string;
 
+  avatarUrl: string;
+
   discord: {
     id: string;
-    avatar: string;
   };
 
   strikes: number;
@@ -88,6 +89,8 @@ export interface FrontendUser {
     }>;
   };
 
+  avatarUrl: string;
+
   _id: string;
 
   uid: string;
@@ -112,7 +115,6 @@ export interface FrontendUser {
 
   discord: {
     id: string;
-    avatar: string;
   };
 
   strikes: number;
